@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CardService } from '../services/card.service'
+import { CardService, ICard } from '../services/card.service'
 
 @Component({
   selector: 'app-play',
@@ -11,6 +11,7 @@ export class PlayPage {
   cardText: string = '';
   cardCategory: string = '';
   cardType: string = '';
+  deck: Array<ICard> = [];
 
   constructor(private cardService: CardService) {
     this.cardText = 'error retrieving card data';
@@ -19,9 +20,20 @@ export class PlayPage {
   }
 
   ngOnInit() {
-    this.cardService.getRemoteJsonData().subscribe(data => {
-      // stubs
-      console.log(data)
-    })
+    this.deck = this.cardService.getDeck();
+    let card: ICard = this.getRandomCard();
+    this.cardText = card.text;
+    this.cardCategory = card.category;
+    this.cardType = card.type;
+  }
+
+  getRandomCard(): ICard {
+    let cardCount = this.cardService.getCardCount();
+    let randomCardId = this.getRandomNumber(1, cardCount);
+    return this.cardService.getCardById(randomCardId.toString()); 
+  }
+
+  getRandomNumber(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
 }
