@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CardService } from "../services/card.service"
+import { CardService } from '../services/card.service'
 
 @Component({
   selector: 'app-play',
@@ -8,7 +8,15 @@ import { CardService } from "../services/card.service"
 })
 export class PlayPage {
 
-  constructor(private cardService: CardService) {}
+  cardText: string = '';
+  cardCategory: string = '';
+  cardType: string = '';
+
+  constructor(private cardService: CardService) {
+    this.cardText = 'error retrieving card data';
+    this.cardCategory = 'error retrieving category';
+    this.cardType = 'error retrieving card type';
+  }
 
   ngOnInit() {
     this.cardService.getRemoteJsonData().subscribe(data => {
