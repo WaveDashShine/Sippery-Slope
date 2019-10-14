@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CardService } from "../services/card.service"
 
 @Component({
   selector: 'app-play',
@@ -7,6 +8,12 @@ import { Component } from '@angular/core';
 })
 export class PlayPage {
 
-  constructor() {}
+  constructor(private cardService: CardService) {}
 
+  ngOnInit() {
+    this.cardService.getRemoteJsonData().subscribe(data => {
+      // stubs
+      console.log(data)
+    })
+  }
 }
