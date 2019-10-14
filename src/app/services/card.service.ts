@@ -1,12 +1,6 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-
-export interface ICard {
-    id: string;
-    text: string;
-    category: string;
-    type: string;
-}
+import { ICard } from '../common/deck.module'
 
 enum ColumnMap {
     Type = 1,
@@ -21,30 +15,12 @@ enum ColumnMap {
 export class CardService {
 
     jsonData = null;
-    deck: Array<ICard> = [];
 
     constructor(private http: HttpClient) {
-        this.getRemoteJsonData().subscribe(data => {
-            this.jsonData = data;
-            this.deck = this.generateCardData(this.jsonData);
-        });
     }
 
     getJsonData() {
         return this.jsonData;
-    }
-
-    // TODO: investigate promise issues
-    getDeck(): Array<ICard> {
-        return this.deck;
-    }
-
-    getCardCount(): number {
-        return this.deck.length;
-    }
-
-    getCardById(id: string): ICard {
-        return this.deck[Number.parseInt(id)];
     }
 
     getLocalData() {
@@ -58,7 +34,7 @@ export class CardService {
         );
     }
 
-    generateCardData(jsonData: JSON): Array<ICard> {
+    generateCardData(jsonData): Array<ICard> {
         let entries = jsonData['feed']['entry'];
         let deck: Array<ICard> = [];
         for (let entry of entries) {
@@ -74,6 +50,7 @@ export class CardService {
             }
             else {
                 let foundCard: ICard = deck[foundIndex];
+                // console.log(foundCard)
                 deck[foundIndex] = this.updateCardFromEntry(foundCard, entry);
             }
         }
@@ -94,8 +71,8 @@ export class CardService {
         return this.isColumnMap(entry, column) ? this.getCellTextFromEntry(entry) : null;
     }
 
-    isColumnMap(entry, column: ColumnMap): boolean {
-        return this.getCellDataFromEntry(entry)['col'] === column;
+    isColumnMap(entry, columnType: ColumnMap): boolean {
+        return this.getCellDataFromEntry(entry)['col'] === columnType.toString();
     }
 
     getCellDataFromEntry(entry) {
@@ -103,6 +80,7 @@ export class CardService {
     }
 
     getCellTextFromEntry(entry): string {
+        console.log(this.getCellDataFromEntry(entry)['$t'])
         return this.getCellDataFromEntry(entry)['$t'];
     }
 

@@ -1,39 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { CardService, ICard } from '../services/card.service'
+import { CardService } from '../services/card.service'
+import { DeckModule, ICard } from '../common/deck.module'
 
 @Component({
   selector: 'app-play',
   templateUrl: 'play.page.html',
   styleUrls: ['play.page.scss']
 })
-export class PlayPage {
+export class PlayPage implements OnInit {
 
   cardText: string = '';
   cardCategory: string = '';
   cardType: string = '';
-  deck: Array<ICard> = [];
 
-  constructor(private cardService: CardService) {
-    this.cardText = 'error retrieving card data';
-    this.cardCategory = 'error retrieving category';
-    this.cardType = 'error retrieving card type';
+  constructor(private cardService: CardService, private deckModule: DeckModule) {
+    // TODO: error handling
+    // this.cardText = 'error retrieving card data';
+    // this.cardCategory = 'error retrieving category';
+    // this.cardType = 'error retrieving card type';
   }
 
   ngOnInit() {
-    this.deck = this.cardService.getDeck();
-    let card: ICard = this.getRandomCard();
-    this.cardText = card.text;
-    this.cardCategory = card.category;
-    this.cardType = card.type;
-  }
-
-  getRandomCard(): ICard {
-    let cardCount = this.cardService.getCardCount();
-    let randomCardId = this.getRandomNumber(1, cardCount);
-    return this.cardService.getCardById(randomCardId.toString()); 
-  }
-
-  getRandomNumber(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
+    this.cardService.getRemoteJsonData().subscribe(data => {
+        this.deckModule.setDeck(this.cardService.generateCardData(data));
+        let card: ICard = this.deckModule.getRandomCard();
+        this.cardText = card.text;
+        this.cardCategory = card.category;
+        this.cardType = card.type;
+    });
   }
 }
