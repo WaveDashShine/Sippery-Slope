@@ -9,11 +9,19 @@ import { DeckModule, ICard } from '../common/deck.module'
 })
 export class PlayPage implements OnInit {
 
-  cardText: string = '';
-  cardCategory: string = '';
-  cardType: string = '';
+  activeCard: ICard;
+  playingDeck: DeckModule;
+  discardPile: DeckModule;
 
-  constructor(private cardService: CardService, private deckModule: DeckModule) {
+  constructor(private cardService: CardService) {
+    this.playingDeck = new DeckModule();
+    this.discardPile = new DeckModule();
+    this.activeCard = {
+      id: '',
+      type: '',
+      category: '',
+      text: ''
+    }
     // TODO: error handling
     // this.cardText = 'error retrieving card data';
     // this.cardCategory = 'error retrieving category';
@@ -22,20 +30,25 @@ export class PlayPage implements OnInit {
 
   ngOnInit() {
     this.cardService.getRemoteJsonData().subscribe(data => {
-        this.deckModule.setDeck(this.cardService.generateCardData(data));
-        this.deckModule.shuffleDeck();
-        let card: ICard = this.deckModule.drawCard();
-        this.cardText = card.text;
-        this.cardCategory = card.category;
-        this.cardType = card.type;
+        this.playingDeck.setDeck(this.cardService.generateCardData(data));
+        this.playingDeck.shuffleDeck();
+        this.nextQuestion();
     });
   }
 
   nextQuestion() {
-
+    if (this.playingDeck.getCardCount() > 0) {
+      let card = this.playingDeck.drawCard();
+      this.activeCard = card;
+      this.discardPile.insertCard(card);
+    }
   }
 
   previousQuestion() {
-
+    if (this.discardPile.getCardCount() > 0) {
+      let card = this.discardPile.drawCard();
+      this.activeCard = card;
+      this.playingDeck.insertCard(card);
+    }
   }
 }

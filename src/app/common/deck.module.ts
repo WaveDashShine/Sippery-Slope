@@ -47,7 +47,11 @@ export class DeckModule {
         }
     }
 
-    drawCard() {
+    drawCard(): ICard {
         return this.deck.pop();
+    }
+
+    insertCard(newCard: ICard, position: number = 0) {
+        this.deck.splice(position, 0, newCard);
     }
 }

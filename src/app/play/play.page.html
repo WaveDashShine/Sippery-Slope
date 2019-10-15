@@ -12,13 +12,13 @@
   </ion-card>
   <ion-card class="card">
     <ion-card-title class="card-type">
-      {{cardType}}
+      {{activeCard.type}}
     </ion-card-title>
     <ion-card-subtitle class="card-category">
-      {{cardCategory}}
+      {{activeCard.category}}
     </ion-card-subtitle>
     <ion-card-content class="card-text">
-      {{cardText}}
+      {{activeCard.text}}
     </ion-card-content>
   </ion-card>
 
@@ -27,10 +27,10 @@
     Then the buttons can be used to mark questions as DRANK
   -->
 
-  <ion-button class="button" (click)="nextQuestion()">
+  <ion-button class="button" (click)="nextQuestion()" *ngIf="this.playingDeck.getCardCount() > 0">
       Next Question
   </ion-button>
-  <ion-button class="button" (click)="previousQuestion()">
+  <ion-button class="button" (click)="previousQuestion()" *ngIf="this.discardPile.getCardCount() > 0">
       Previous Question
   </ion-button>
 
