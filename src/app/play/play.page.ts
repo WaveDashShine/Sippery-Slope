@@ -23,10 +23,19 @@ export class PlayPage implements OnInit {
   ngOnInit() {
     this.cardService.getRemoteJsonData().subscribe(data => {
         this.deckModule.setDeck(this.cardService.generateCardData(data));
-        let card: ICard = this.deckModule.getRandomCard();
+        this.deckModule.shuffleDeck();
+        let card: ICard = this.deckModule.drawCard();
         this.cardText = card.text;
         this.cardCategory = card.category;
         this.cardType = card.type;
     });
+  }
+
+  nextQuestion() {
+
+  }
+
+  previousQuestion() {
+
   }
 }

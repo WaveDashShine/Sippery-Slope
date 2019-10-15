@@ -50,7 +50,6 @@ export class CardService {
             }
             else {
                 let foundCard: ICard = deck[foundIndex];
-                // console.log(foundCard)
                 deck[foundIndex] = this.updateCardFromEntry(foundCard, entry);
             }
         }
@@ -80,7 +79,6 @@ export class CardService {
     }
 
     getCellTextFromEntry(entry): string {
-        console.log(this.getCellDataFromEntry(entry)['$t'])
         return this.getCellDataFromEntry(entry)['$t'];
     }
 

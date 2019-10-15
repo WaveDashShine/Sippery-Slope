@@ -37,14 +37,17 @@ export class DeckModule {
         return this.deck[id];
     }
 
-    getRandomCard(): ICard {
-        let cardCount = this.getCardCount();
-        let randomCardId = this.getRandomNumber(0, cardCount - 1);
-        return this.getCardById(randomCardId);
-      }
-    
-      getRandomNumber(min: number, max: number): number {
-        return Math.floor(Math.random() * (max - min + 1) + min);
-      }
+    // ES6 version of the Fisher-Yates algorithm
+    // picks one random element for each original array element
+    // and excludes it from the next draw
+    shuffleDeck() {
+        for (let i = this.deck.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.deck[i], this.deck[j]] = [this.deck[j], this.deck[i]];
+        }
+    }
 
+    drawCard() {
+        return this.deck.pop();
+    }
 }

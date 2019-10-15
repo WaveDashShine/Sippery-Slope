@@ -10,14 +10,14 @@
   <ion-card class="logo">
       Logo
   </ion-card>
-  <ion-card class="question-card">
-    <ion-card-header>
+  <ion-card class="card">
+    <ion-card-title class="card-type">
       {{cardType}}
-    </ion-card-header>
-    <ion-card-subtitle>
+    </ion-card-title>
+    <ion-card-subtitle class="card-category">
       {{cardCategory}}
     </ion-card-subtitle>
-    <ion-card-content>
+    <ion-card-content class="card-text">
       {{cardText}}
     </ion-card-content>
   </ion-card>
@@ -27,10 +27,10 @@
     Then the buttons can be used to mark questions as DRANK
   -->
 
-  <ion-button class="button">
+  <ion-button class="button" (click)="nextQuestion()">
       Next Question
   </ion-button>
-  <ion-button class="button">
+  <ion-button class="button" (click)="previousQuestion()">
       Previous Question
   </ion-button>
 

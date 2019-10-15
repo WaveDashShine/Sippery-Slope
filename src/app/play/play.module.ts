@@ -14,4 +14,6 @@ import { PlayPage } from './play.page';
   ],
   declarations: [PlayPage]
 })
-export class PlayPageModule {}
+export class PlayPageModule {
+  
+}
