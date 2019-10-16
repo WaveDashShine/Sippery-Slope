@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { ICard } from '../common/deck.module'
+import { Alert } from 'selenium-webdriver';
 
 enum ColumnMap {
     Type = 1,
@@ -14,17 +15,12 @@ enum ColumnMap {
 
 export class CardService {
 
-    jsonData = null;
-
     constructor(private http: HttpClient) {
-    }
-
-    getJsonData() {
-        return this.jsonData;
     }
 
     getLocalData() {
         // this.https.get("assets/data/cardData.json");
+        alert('get local JSON data is not implemented');
         return {};
     }
 
