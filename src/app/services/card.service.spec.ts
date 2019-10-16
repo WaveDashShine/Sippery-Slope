@@ -17,12 +17,11 @@ describe('CardService', () => {
         injector = getTestBed();
         service = injector.get(CardService);
         httpMock = injector.get(HttpTestingController);
-
     });
 
     afterEach(() => {
         httpMock.verify();
-      });
+    });
 
     it('should create', () => {
         expect(service).toBeTruthy();

@@ -1,5 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, getTestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
 
 import { PlayPage } from './play.page';
 import { CardService } from '../services/card.service';
@@ -10,7 +11,9 @@ describe('PlayPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PlayPage, CardService],
+      providers: [CardService],
+      imports: [HttpClientTestingModule],
+      declarations: [PlayPage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));
