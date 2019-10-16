@@ -14,6 +14,8 @@ enum ColumnMap {
 
 export class CardService {
 
+    default_url: string = "https://spreadsheets.google.com/feeds/cells/10fvtOzM30Xo5gi9O2gYjJxPpKNT_0Z46QolpVL1DOU0/1/public/full?alt=json"
+
     constructor(private http: HttpClient) {
     }
 
@@ -23,9 +25,9 @@ export class CardService {
         return {};
     }
 
-    getRemoteJsonData() {
+    getRemoteJsonData(url: string = this.default_url) {
         return this.http.get(
-            "https://spreadsheets.google.com/feeds/cells/10fvtOzM30Xo5gi9O2gYjJxPpKNT_0Z46QolpVL1DOU0/1/public/full?alt=json"
+            url
         );
     }
 
