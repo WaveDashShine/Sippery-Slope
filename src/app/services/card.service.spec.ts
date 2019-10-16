@@ -1,5 +1,4 @@
-import { Injectable, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { CardService } from './card.service'
 import { ComponentFixture, async, TestBed } from '@angular/core/testing'
 
@@ -26,4 +25,10 @@ describe('CardService', () => {
 
     // TODO: unit tests for card service
     // use worksheet 3 of the spreadsheet set up json for test cases
+    it('should get json', () => {
+        let data = this.http.get(
+            "https://spreadsheets.google.com/feeds/cells/10fvtOzM30Xo5gi9O2gYjJxPpKNT_0Z46QolpVL1DOU0/3/public/full?alt=json"
+        );
+        expect(data).toBeTruthy();
+    })
 });

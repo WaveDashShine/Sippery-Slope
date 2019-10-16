@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { ICard } from '../common/deck.module'
-import { Alert } from 'selenium-webdriver';
+import { ICard } from '../common/deckManager'
 
 enum ColumnMap {
     Type = 1,

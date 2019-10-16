@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CardService } from '../services/card.service'
-import { DeckModule, ICard } from '../common/deck.module'
+import { DeckManager, ICard } from '../common/deckManager'
 
 @Component({
   selector: 'app-play',
@@ -10,12 +10,12 @@ import { DeckModule, ICard } from '../common/deck.module'
 export class PlayPage implements OnInit {
 
   activeCard: ICard;
-  playingDeck: DeckModule;
-  discardPile: DeckModule;
+  playingDeck: DeckManager;
+  discardPile: DeckManager;
 
   constructor(private cardService: CardService) {
-    this.playingDeck = new DeckModule();
-    this.discardPile = new DeckModule();
+    this.playingDeck = new DeckManager();
+    this.discardPile = new DeckManager();
     this.activeCard = {
       id: '',
       type: '',

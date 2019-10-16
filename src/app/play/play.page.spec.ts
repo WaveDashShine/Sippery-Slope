@@ -2,6 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PlayPage } from './play.page';
+import { CardService } from '../services/card.service';
 
 describe('PlayPage', () => {
   let component: PlayPage;
@@ -9,7 +10,7 @@ describe('PlayPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PlayPage],
+      declarations: [PlayPage, CardService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));

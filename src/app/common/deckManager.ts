@@ -1,6 +1,3 @@
-import { NgModule }     from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 export interface ICard {
     id: string;
     text: string;
@@ -8,13 +5,7 @@ export interface ICard {
     type: string;
 }
 
-@NgModule({
-    imports: [
-      CommonModule
-    ],
-    declarations: []
-  })
-export class DeckModule {
+export class DeckManager {
     deck: Array<ICard> = [];
 
     constructor() {
