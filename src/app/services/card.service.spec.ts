@@ -28,8 +28,6 @@ describe('CardService', () => {
         expect(service).toBeTruthy();
     });
 
-    // TODO: unit tests for card service
-    // use worksheet 3 of the spreadsheet set up json for test cases
     it('should get json', () => {
         let data = service.getRemoteJsonData(test_url);
         expect(data).toBeTruthy();
