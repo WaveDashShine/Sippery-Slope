@@ -6,7 +6,7 @@ export interface ICard {
 }
 
 export class DeckManager {
-    deck: Array<ICard> = [];
+    private deck: Array<ICard> = [];
 
     constructor() {
         this.deck = [];
@@ -39,7 +39,7 @@ export class DeckManager {
     }
 
     drawCard(): ICard {
-        return this.deck.pop();
+        return this.deck.length > 0 ? this.deck.pop() : null;
     }
 
     insertCard(newCard: ICard, position: number = 0) {

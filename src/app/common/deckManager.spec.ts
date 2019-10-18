@@ -57,6 +57,9 @@ describe('Deck Manager', () => {
 
   it('should draw a card', () => {
     expect(deckManager.drawCard()).toEqual(testCard1);
+    let empty_deck: Array<ICard> = [];
+    deckManager.setDeck(empty_deck);
+    expect(deckManager.drawCard()).toBeNull();
   });
 
   it('should shuffle deck', () => {
@@ -64,7 +67,7 @@ describe('Deck Manager', () => {
     spyOn(Math, 'random');
     deckManager.shuffleDeck();
     expect(Math.random).toHaveBeenCalled();
-    expect(deckManager.deck).toBeDefined();
+    expect(deckManager.getDeck).toBeDefined();
     expect(deckManager.getCardCount()).toEqual(deck_before_shuffle.length);
   });
 });
