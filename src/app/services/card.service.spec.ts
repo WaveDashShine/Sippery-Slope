@@ -30,5 +30,37 @@ describe('CardService', () => {
     it('should get json', () => {
         let data = service.getRemoteJsonData(test_url);
         expect(data).toBeTruthy();
-    })
+    });
+
+    describe('Parse JSON', () => {
+
+        it('should generate card data', () => {
+    
+        });
+    
+        it('should generate card from entry data', () => {
+    
+        });
+    
+        it('should get content from entry', () => {
+    
+        });
+    
+        it('should match column map', () => {
+
+        });
+
+        it('should get cell data from entry', () => {
+
+        });
+
+        it('should get cell text from entry', () => {
+
+        });
+
+        it('should update card from entry', () => {
+
+        });
+    });
+
 });
