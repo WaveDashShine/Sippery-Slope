@@ -3,28 +3,24 @@ import { DeckManager, ICard } from './deckManager';
 describe('Deck Manager', () => {
 
   let deckManager: DeckManager = new DeckManager();
-  let testCard1: ICard = {
-    id: '1',
-    type: 'card1',
-    category: 'test1',
-    text: 'textCard1'
-  }
-  let testCard2: ICard = {
-    id: '2',
-    type: 'card2',
-    category: 'test2',
-    text: 'textCard2'
-  }
-  let testCard3: ICard = {
-    id: '3',
-    type: 'card3',
-    category: 'test3',
-    text: 'textCard3'
+  let cardsToGenerate: number = 50
+
+  function generateCards(cardsToGenerate: number): Array<ICard> {
+    let deck: Array<ICard> = [];
+    for (var i = 0; i < cardsToGenerate; i++) {
+      let testCard: ICard = {
+        id: i.toString(),
+        type: 'card' + i.toString(),
+        category: 'test' + i.toString(),
+        text: 'textCard' + i.toString()
+      }
+      deck.push(testCard);
+    }
+    return deck;
   }
 
   beforeEach(() => {
-    deckManager.insertCard(testCard1);
-    deckManager.insertCard(testCard2);
+    deckManager.setDeck(generateCards(cardsToGenerate))
   });
 
   afterEach(() => {
@@ -36,14 +32,25 @@ describe('Deck Manager', () => {
     expect(deckManager).toBeTruthy();
   });
 
+  it('should get card count', () => {
+    expect(deckManager.getCardCount()).toEqual(cardsToGenerate);
+  });
+
   it('should be able to insert card into deck', () => {
-    expect(deckManager.getCardCount()).toEqual(2);
+    let testCard1: ICard = generateCards(1).pop();
+    deckManager.insertCard(testCard1);
+    expect(deckManager.getCardCount()).toEqual(cardsToGenerate + 1);
+    expect(deckManager.getCardById(Number(testCard1.id))).toEqual(testCard1)
   });
 
   it('should get card by ID', () => {
-    expect(deckManager.getCardById(1)).toBe(testCard1);
-    expect(deckManager.getCardById(2)).toBe(testCard2);
-    expect(deckManager.getCardById(99)).toBeFalsy();
+    let testCard1: ICard = generateCards(2).pop();
+    // 0 based indexing
+    expect(deckManager.getCardById(1).id).toBe(testCard1.id);
+    expect(deckManager.getCardById(1).type).toBe(testCard1.type);
+    expect(deckManager.getCardById(1).category).toBe(testCard1.category);
+    expect(deckManager.getCardById(1).text).toBe(testCard1.text);
+    expect(deckManager.getCardById(999)).toBeFalsy();
   });
 
   it('should get and set deck', () => {
@@ -55,20 +62,29 @@ describe('Deck Manager', () => {
     expect(deckManager.getCardCount()).toEqual(tempDeck.length);
   });
 
-  it('should draw a card', () => {
-    expect(deckManager.drawCard()).toEqual(testCard1);
-    let empty_deck: Array<ICard> = [];
-    deckManager.setDeck(empty_deck);
-    expect(deckManager.drawCard()).toBeNull();
+  describe('drawing a card', () => {
+    it('should draw a card', () => {
+      let drawnCard: ICard = deckManager.drawCard()
+      expect(drawnCard).toBeDefined();
+      expect(deckManager.getCardCount()).toEqual(cardsToGenerate - 1);
+      expect(deckManager.getCardById(Number(drawnCard.id))).toBeFalsy();
+    });
+
+    it('should not draw from empty deck', () => {
+      let empty_deck: Array<ICard> = [];
+      deckManager.setDeck(empty_deck);
+      expect(deckManager.drawCard()).toBeNull();
+    });
   });
 
   it('should shuffle deck', () => {
-    let deck_before_shuffle: Array<ICard> = deckManager.getDeck();
-    spyOn(Math, 'random');
+    let deck: Array<ICard> = generateCards(cardsToGenerate);
     deckManager.shuffleDeck();
-    expect(Math.random).toHaveBeenCalled();
-    expect(deckManager.getDeck).toBeDefined();
-    expect(deckManager.getCardCount()).toEqual(deck_before_shuffle.length);
+    expect(deckManager.getDeck()).toBeDefined();
+    expect(deckManager.getCardCount()).toEqual(deck.length);
+    for (var i=0; i < 3; i++) {
+      expect(deckManager.getDeck()[i]).not.toEqual(deck[i]);
+    }
   });
 });
 
