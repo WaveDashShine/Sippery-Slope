@@ -33,47 +33,48 @@ describe('Deck Manager', () => {
   });
 
   it('should get card count', () => {
-    expect(deckManager.getCardCount()).toEqual(cardsToGenerate);
+    expect(deckManager.getCardCount()).toEqual(cardsToGenerate, 'failed to get card count');
   });
 
   it('should be able to insert card into deck', () => {
     let testCard1: ICard = generateCards(1).pop();
     deckManager.insertCard(testCard1);
-    expect(deckManager.getCardCount()).toEqual(cardsToGenerate + 1);
-    expect(deckManager.getCardById(Number(testCard1.id))).toEqual(testCard1)
+    expect(deckManager.getCardCount()).toEqual(cardsToGenerate + 1, 'failed to insert card');
+    expect(deckManager.getCardById(Number(testCard1.id))).toEqual(testCard1, 'failed to find card after insertion')
   });
 
   it('should get card by ID', () => {
     let testCard1: ICard = generateCards(2).pop();
     // 0 based indexing
-    expect(deckManager.getCardById(1).id).toBe(testCard1.id);
-    expect(deckManager.getCardById(1).type).toBe(testCard1.type);
-    expect(deckManager.getCardById(1).category).toBe(testCard1.category);
-    expect(deckManager.getCardById(1).text).toBe(testCard1.text);
-    expect(deckManager.getCardById(999)).toBeFalsy();
+    expect(deckManager.getCardById(1).id).toBe(testCard1.id, 'fail to get card id');
+    expect(deckManager.getCardById(1).type).toBe(testCard1.type, 'fail to get card type');
+    expect(deckManager.getCardById(1).category).toBe(testCard1.category, 'fail to get card category');
+    expect(deckManager.getCardById(1).text).toBe(testCard1.text, 'fail to get card text');
+    expect(deckManager.getCardById(999)).toBeNull('fail to find card should return null');
   });
 
   it('should get and set deck', () => {
     let tempDeck: Array<ICard> = deckManager.getDeck();
+    expect(tempDeck).toBeTruthy('failed to get deck')
     let empty_deck: Array<ICard> = [];
     deckManager.setDeck(empty_deck);
-    expect(deckManager.getCardCount()).toEqual(0);
+    expect(deckManager.getCardCount()).toEqual(0, 'failed to set to empty deck');
     deckManager.setDeck(tempDeck);
-    expect(deckManager.getCardCount()).toEqual(tempDeck.length);
+    expect(deckManager.getCardCount()).toEqual(tempDeck.length, 'failed to set deck');
   });
 
   describe('drawing a card', () => {
     it('should draw a card', () => {
       let drawnCard: ICard = deckManager.drawCard()
-      expect(drawnCard).toBeDefined();
-      expect(deckManager.getCardCount()).toEqual(cardsToGenerate - 1);
-      expect(deckManager.getCardById(Number(drawnCard.id))).toBeFalsy();
+      expect(drawnCard).toBeDefined('expect draw card to be defined');
+      expect(deckManager.getCardCount()).toEqual(cardsToGenerate - 1, 'draw card should decrease card count');
+      expect(deckManager.getCardById(Number(drawnCard.id))).toBeNull('should return null if no card found');
     });
 
     it('should not draw from empty deck', () => {
       let empty_deck: Array<ICard> = [];
       deckManager.setDeck(empty_deck);
-      expect(deckManager.drawCard()).toBeNull();
+      expect(deckManager.drawCard()).toBeNull("should not draw from empty deck");
     });
   });
 
@@ -82,9 +83,13 @@ describe('Deck Manager', () => {
     deckManager.shuffleDeck();
     expect(deckManager.getDeck()).toBeDefined();
     expect(deckManager.getCardCount()).toEqual(deck.length);
-    for (var i=0; i < 3; i++) {
-      expect(deckManager.getDeck()[i]).not.toEqual(deck[i]);
+    let cardSamePositionCount: number = 0;
+    for (var i=0; i < deck.length; i++) {
+      if (deckManager.getDeck()[i] === deck[i]) {
+        cardSamePositionCount++;
+      };
     }
+    expect(cardSamePositionCount).toBeLessThanOrEqual(deck.length*0.2, "Shuffle was not random enough");
   });
 });
 

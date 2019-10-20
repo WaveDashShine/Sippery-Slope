@@ -25,7 +25,8 @@ export class DeckManager {
     }
 
     getCardById(id: number): ICard {
-        return this.deck.find(card => card.id === id.toString());
+        let foundCard: ICard = this.deck.find(card => card.id === id.toString())
+        return foundCard === undefined ? null : foundCard;
     }
 
     // ES6 version of the Fisher-Yates algorithm
