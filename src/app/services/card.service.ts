@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { ICard } from '../common/deckManager'
 
-enum ColumnMap {
+export enum ColumnMap {
     Type = 1,
     Category = 2,
     Text = 3
@@ -32,7 +32,7 @@ export class CardService {
     }
 
     generateCardData(jsonData): Array<ICard> {
-        let entries = jsonData['feed']['entry'];
+        let entries = this.getEntriesFromData(jsonData);
         let deck: Array<ICard> = [];
         for (let entry of entries) {
             if (deck.length === 0) {
@@ -51,6 +51,10 @@ export class CardService {
             }
         }
         return deck;
+    }
+
+    getEntriesFromData(jsonData) {
+        return jsonData['feed']['entry'];
     }
 
     generateCardFromEntry(entry): ICard {
@@ -81,7 +85,7 @@ export class CardService {
 
     updateCardFromEntry(foundCard:ICard, entry): ICard {
         let updatedCard: ICard = {
-            id: foundCard.id,
+            id: foundCard.id || this.getIdFromEntry(entry),
             type: foundCard.type || this.getContentFromEntry(entry, ColumnMap.Type),
             category: foundCard.category || this.getContentFromEntry(entry, ColumnMap.Category),
             text: foundCard.text || this.getContentFromEntry(entry, ColumnMap.Text)
