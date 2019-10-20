@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CardService } from '../services/card.service'
-import { DeckManager, ICard } from '../common/deckManager'
+import { CardService } from '../services/card.service';
+import { DeckManager, ICard } from '../common/deckManager';
 
 @Component({
   selector: 'app-play',
