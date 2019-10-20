@@ -6,6 +6,25 @@
     height: 50%;
 }
 
-.button {
+.card-container {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-item {
+    flex-grow: 1;
+}
+
+.card-text {
+    flex-grow: 5;
+    flex-basis: 50%;
+}
+
+.button-container {
+    display: flex;
+}
+
+.button-item {
+    flex-basis: 50%;
 }

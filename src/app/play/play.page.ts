@@ -32,7 +32,8 @@ export class PlayPage implements OnInit {
     this.cardService.getRemoteJsonData().subscribe(data => {
         this.playingDeck.setDeck(this.cardService.generateCardData(data));
         this.playingDeck.shuffleDeck();
-        this.nextQuestion();
+        let card = this.playingDeck.drawCard();
+        this.activeCard = card;
     });
   }
 
