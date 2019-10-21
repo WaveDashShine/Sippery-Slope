@@ -28,11 +28,11 @@
   -->
 
   <div class="button-container">
-    <ion-button class="button-item" (click)="nextQuestion()" [style.visibility]="this.playingDeck.getCardCount() > 0 ? 'visible' : 'hidden'">
-        Next Question
-    </ion-button>
     <ion-button class="button-item" (click)="previousQuestion()" [style.visibility]="this.discardPile.getCardCount() > 0 ? 'visible' : 'hidden'">
         Previous Question
+    </ion-button>
+    <ion-button class="button-item" (click)="nextQuestion()" [style.visibility]="this.playingDeck.getCardCount() > 0 ? 'visible' : 'hidden'">
+        Next Question
     </ion-button>
   </div>
 
