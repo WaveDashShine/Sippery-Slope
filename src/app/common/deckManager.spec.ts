@@ -36,11 +36,28 @@ describe('Deck Manager', () => {
     expect(deckManager.getCardCount()).toEqual(cardsToGenerate, 'failed to get card count');
   });
 
-  it('should be able to insert card into deck', () => {
-    let testCard1: ICard = generateCards(1).pop();
-    deckManager.insertCard(testCard1);
-    expect(deckManager.getCardCount()).toEqual(cardsToGenerate + 1, 'failed to insert card');
-    expect(deckManager.getCardById(Number(testCard1.id))).toEqual(testCard1, 'failed to find card after insertion')
+  describe('inserting a card', () => {
+    it('should be able to insert card into deck', () => {
+      let testCard1: ICard = generateCards(1).pop();
+      deckManager.insertCard(testCard1);
+      expect(deckManager.getCardCount()).toEqual(cardsToGenerate + 1, 'failed to insert card');
+      expect(deckManager.getCardById(Number(testCard1.id))).toEqual(testCard1, 'failed to find card after insertion');
+    });
+
+    it('should be able to insert card into top of deck', () => {
+      let testCard1: ICard = generateCards(1).pop();
+      deckManager.insertCard(testCard1, deckManager.getCardCount());
+      expect(deckManager.getCardCount()).toEqual(cardsToGenerate + 1, 'failed to insert card');
+      expect(deckManager.getCardById(Number(testCard1.id))).toEqual(testCard1, 'failed to find card after insertion');
+      let inserted_card: ICard = deckManager.drawCard();
+      expect(testCard1).toEqual(inserted_card);
+
+      deckManager.insertCardOnTop(testCard1);
+      expect(deckManager.getCardCount()).toEqual(cardsToGenerate + 1, 'failed to insert card');
+      expect(deckManager.getCardById(Number(testCard1.id))).toEqual(testCard1, 'failed to find card after insertion');
+      let pushed_card: ICard = deckManager.drawCard();
+      expect(testCard1).toEqual(pushed_card);
+    });
   });
 
   it('should get card by ID', () => {

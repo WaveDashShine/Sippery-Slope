@@ -39,17 +39,17 @@ export class PlayPage implements OnInit {
 
   nextQuestion() {
     if (this.playingDeck.getCardCount() > 0) {
+      this.discardPile.insertCardOnTop(this.activeCard);
       let card = this.playingDeck.drawCard();
       this.activeCard = card;
-      this.discardPile.insertCard(card);
     }
   }
 
   previousQuestion() {
     if (this.discardPile.getCardCount() > 0) {
+      this.playingDeck.insertCardOnTop(this.activeCard);
       let card = this.discardPile.drawCard();
       this.activeCard = card;
-      this.playingDeck.insertCard(card);
     }
   }
 }

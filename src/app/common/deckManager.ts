@@ -40,10 +40,15 @@ export class DeckManager {
     }
 
     drawCard(): ICard {
-        return this.deck.length > 0 ? this.deck.pop() : null;
+        return this.getCardCount() > 0 ? this.deck.pop() : null;
     }
 
     insertCard(newCard: ICard, position: number = 0) {
-        this.deck.splice(position, 0, newCard);
+        let cards_to_remove: number = 0
+        this.deck.splice(position, cards_to_remove, newCard);
+    }
+
+    insertCardOnTop(newCard: ICard) {
+        this.deck.push(newCard);
     }
 }
