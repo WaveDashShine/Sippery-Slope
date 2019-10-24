@@ -52,4 +52,8 @@ export class PlayPage implements OnInit {
       this.activeCard = card;
     }
   }
+
+  // Requires FAB for filtering categories
+  // try loading different UI settings for the play page
+  // maybe make prototypes for it
 }

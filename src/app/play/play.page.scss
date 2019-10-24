@@ -23,8 +23,9 @@
 
 .button-container {
     display: flex;
+    flex-direction: row;
 }
 
 .button-item {
-    flex-basis: 50%;
+    flex: 1 1 50%;
 }
