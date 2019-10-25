@@ -34,44 +34,59 @@ export class PlayPage implements OnInit {
     this.cardService.getRemoteJsonData().subscribe(data => {
         this.playingDeck.setDeck(this.cardService.generateCardData(data));
         this.playingDeck.shuffleDeck();
-        let card = this.playingDeck.drawCard();
-        this.activeCard = card;
-        this.categoryList = new Set(this.playingDeck.getDeck().map(card => card.category));
-        this.categoryFilter = Array.from(this.categoryList);
+        this.initializeCategories(this.playingDeck);
+        this.showNextCard(this.playingDeck);
     });
   }
 
-  // TODO: category filters
+  private showNextCard(deck: DeckManager) {
+    let card = this.drawUnfilteredCategory(deck);
+    this.activeCard = card;
+  }
 
-  nextQuestion() {
-    if (this.playingDeck.getCardCount() > 0) {
+  private drawUnfilteredCategory(deck: DeckManager): ICard {
+    let card = deck.drawCard();
+    while ((!this.categoryFilter.includes(card.category)) && this.getCategoryCount(deck) > 0) {
+      deck.insertCard(card, Math.floor(Math.random() * deck.getCardCount() - 1));
+      card = deck.drawCard();
+    }
+    return card;
+  }
+
+  private initializeCategories(deck: DeckManager) {
+    this.categoryList = new Set(deck.getDeck().map(card => card.category));
+    this.categoryFilter = Array.from(this.categoryList);
+  }
+
+  nextCard() {
+    if (this.getPlayDeckCategoryCount() > 0) {
       this.discardPile.insertCardOnTop(this.activeCard);
-      let card = this.playingDeck.drawCard();
-      this.activeCard = card;
+      this.showNextCard(this.playingDeck);
     }
   }
 
-  previousQuestion() {
-    if (this.discardPile.getCardCount() > 0) {
+  previousCard() {
+    if (this.getDiscardDeckCategoryCount() > 0) {
       this.playingDeck.insertCardOnTop(this.activeCard);
-      let card = this.discardPile.drawCard();
-      this.activeCard = card;
+      this.showNextCard(this.discardPile);
+    }
+  }
+
+  updateActiveCardByCategory() {
+    if (!this.categoryFilter.includes(this.activeCard.category)) {
+      this.showNextCard(this.playingDeck);
     }
   }
 
   getPlayDeckCategoryCount() {
-    return this.getCategoryCount(this.playingDeck.getDeck());
+    return this.getCategoryCount(this.playingDeck);
   }
 
   getDiscardDeckCategoryCount() {
-    return this.getCategoryCount(this.discardPile.getDeck());
+    return this.getCategoryCount(this.discardPile);
   }
 
-  getCategoryCount(deck: Array<ICard>): number {
-    return deck.filter(card => this.categoryFilter.includes(card.category)).length;
+  private getCategoryCount(deck: DeckManager): number {
+    return deck.getDeck().filter(card => this.categoryFilter.includes(card.category)).length;
   }
-
-  // Requires FAB for filtering categories
-  // try loading different UI settings for the play page
-  // maybe make prototypes for it
 }
