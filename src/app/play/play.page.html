@@ -39,7 +39,7 @@
   <!-- fab placed to the bottom end -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
-      <ion-select (ionChange)="this.updateActiveCardByCategory()" [(ngModel)]="this.categoryFilter" multiple="true" cancelText="Cancel" okText="Ok">
+      <ion-select [interfaceOptions]="{ header: 'Filter Categories' }" placeholder="No categories found..." (ionChange)="this.updateActiveCardByCategory()" [(ngModel)]="this.categoryFilter" multiple="true" cancelText="Cancel" okText="Ok">
         <ion-select-option *ngFor="let category of this.categoryList">{{category}}</ion-select-option>
       </ion-select>
     </ion-fab-button>
