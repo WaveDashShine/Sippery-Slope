@@ -12,6 +12,8 @@ export class PlayPage implements OnInit {
   activeCard: ICard;
   playingDeck: DeckManager;
   discardPile: DeckManager;
+  categoryList: Set<string>;
+  categoryFilter: Array<string>;
 
   constructor(private cardService: CardService) {
     this.playingDeck = new DeckManager();
@@ -34,8 +36,12 @@ export class PlayPage implements OnInit {
         this.playingDeck.shuffleDeck();
         let card = this.playingDeck.drawCard();
         this.activeCard = card;
+        this.categoryList = new Set(this.playingDeck.getDeck().map(card => card.category));
+        this.categoryFilter = Array.from(this.categoryList);
     });
   }
+
+  // TODO: category filters
 
   nextQuestion() {
     if (this.playingDeck.getCardCount() > 0) {
@@ -51,6 +57,18 @@ export class PlayPage implements OnInit {
       let card = this.discardPile.drawCard();
       this.activeCard = card;
     }
+  }
+
+  getPlayDeckCategoryCount() {
+    return this.getCategoryCount(this.playingDeck.getDeck());
+  }
+
+  getDiscardDeckCategoryCount() {
+    return this.getCategoryCount(this.discardPile.getDeck());
+  }
+
+  getCategoryCount(deck: Array<ICard>): number {
+    return deck.filter(card => this.categoryFilter.includes(card.category)).length;
   }
 
   // Requires FAB for filtering categories
