@@ -47,7 +47,7 @@ export class PlayPage implements OnInit {
   private drawUnfilteredCategory(deck: DeckManager): ICard {
     let card = deck.drawCard();
     while ((!this.categoryFilter.includes(card.category)) && this.getCategoryCount(deck) > 0) {
-      deck.insertCard(card, Math.floor(Math.random() * deck.getCardCount() - 1));
+      deck.insertCard(card);
       card = deck.drawCard();
     }
     return card;
