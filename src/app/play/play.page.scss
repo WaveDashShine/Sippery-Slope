@@ -20,6 +20,7 @@ ion-fab-button {
     background-image: url(../../assets/Card_frame.svg);
     background-size: 100% 100%;
     margin: 1%;
+    filter: drop-shadow(2px 2px 15px rgba(0, 0, 0, 0.5));
 }
 
 .card-container {
