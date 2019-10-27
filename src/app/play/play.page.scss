@@ -6,6 +6,10 @@ ion-card {
     box-shadow: none;
 }
 
+ion-content {
+    --ion-background-color: rgb(140, 120, 85);
+}
+
 .card {
     height: auto;
     min-height: 70%;
