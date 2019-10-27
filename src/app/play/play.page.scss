@@ -3,22 +3,35 @@
 }
 
 .card {
-    height: 50%;
+    height: auto;
+    min-height: 70%;
 }
 
 .card-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: 'Epilog';
 }
 
 .card-item {
     flex-grow: 1;
 }
 
+.card-type {
+    font-size: 10vw;
+}
+
+.card-category {
+    font-size: 6vw;
+}
+
 .card-text {
+    padding: 0% 8%; // top right bottom left
     flex-grow: 5;
     flex-basis: 50%;
+    font-size: 9vw;
+    color: black;
 }
 
 .button-container {
