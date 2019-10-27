@@ -2,9 +2,15 @@
     height:10%;
 }
 
+ion-card {
+    box-shadow: none;
+}
+
 .card {
     height: auto;
     min-height: 70%;
+    background-image: url(../../assets/Card_frame.png);
+    background-size: 100% 100%;
 }
 
 .card-container {
@@ -19,19 +25,21 @@
 }
 
 .card-type {
+    padding-top: 5%;
     font-size: 10vw;
 }
 
 .card-category {
+    padding: 0%;
     font-size: 6vw;
 }
 
 .card-text {
-    padding: 0% 8%; // top right bottom left
+    padding: 0% 5% 8% 11%; // top right bottom left
     flex-grow: 5;
     flex-basis: 50%;
     font-size: 9vw;
-    color: black;
+    color: 	rgb(64,64,64);
 }
 
 .button-container {
@@ -40,5 +48,5 @@
 }
 
 .button-item {
-    flex: 1 1 50%;
+    flex: 1 1 50%; // flex-grow flex-shrink flex-basis
 }

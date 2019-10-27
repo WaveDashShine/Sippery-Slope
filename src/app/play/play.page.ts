@@ -89,4 +89,14 @@ export class PlayPage implements OnInit {
   private getCategoryCount(deck: DeckManager): number {
     return deck.getDeck().filter(card => this.categoryFilter.includes(card.category)).length;
   }
+
+  restartGame() {
+    this.playingDeck.insertCard(this.activeCard);
+    for (let discardedCard of this.discardPile.getDeck()) {
+      this.playingDeck.insertCard(discardedCard);
+    }
+    this.playingDeck.shuffleDeck();
+    this.discardPile.setDeck(new Array<ICard>());
+    this.showNextCard(this.playingDeck);
+  }
 }
