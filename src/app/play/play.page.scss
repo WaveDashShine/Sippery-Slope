@@ -11,6 +11,7 @@ ion-card {
     min-height: 70%;
     background-image: url(../../assets/Card_frame.png);
     background-size: 100% 100%;
+    margin: 1%;
 }
 
 .card-container {
@@ -22,6 +23,7 @@ ion-card {
 
 .card-item {
     flex-grow: 1;
+    margin: 0;
 }
 
 .card-type {
@@ -49,4 +51,26 @@ ion-card {
 
 .button-item {
     flex: 1 1 50%; // flex-grow flex-shrink flex-basis
+    background-image: url(../../assets/UI_01_02.png);
+    background-size: 100% 100%;
+    margin: 1%;
+}
+
+.button-text {
+    text-align: center;
+    font-family: 'Epilog';
+    font-size: 7vw;
+    //padding-bottom: 4%;
+    color: white;
+}
+
+@media (orientation: landscape) {
+    /* landscape styles */
+    .card-item {
+        font-size: 3vw;
+    }
+
+    .button-text {
+        font-size: 3vw;
+    }
 }
