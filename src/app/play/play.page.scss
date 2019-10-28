@@ -2,13 +2,9 @@
     height:10%;
 }
 
-ion-content {
-    font-family: 'Helvetica';
-    font-weight: bolder;
-}
-
 ion-card {
     box-shadow: none;
+    font-family: 'Epilog';
 }
 
 ion-content {
@@ -21,6 +17,7 @@ ion-fab-button, ion-button {
     --border-radius: 5px;
     --border-width: 2px;
     --border-style: solid;
+    font-family: 'Epilog';
 }
 
 .card {
