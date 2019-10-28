@@ -26,6 +26,7 @@ ion-fab-button, ion-button {
     background-image: url(../../assets/Card_frame.svg);
     background-size: 100% 100%;
     margin: 1%;
+    // drop-shadow for svg
     //filter: drop-shadow(2px 2px 15px rgba(0, 0, 0, 0.5));
     filter: grayscale(1);
 }
@@ -74,8 +75,7 @@ ion-fab-button, ion-button {
 
 .button-text {
     text-align: center;
-    font-size: 5vw;
-    //padding-bottom: 4%;
+    font-size: 7vw;
     color: white;
 }
 
