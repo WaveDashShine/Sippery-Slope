@@ -25,12 +25,12 @@
   -->
 
   <div class="button-container">
-    <ion-card class="button-item" (click)="previousCard()" [style.visibility]="this.getDiscardDeckCategoryCount() > 0 ? 'visible' : 'hidden'">
+    <ion-button fill="outline" class="button-item" (click)="previousCard()" [style.visibility]="this.getDiscardDeckCategoryCount() > 0 ? 'visible' : 'hidden'">
         <p class="button-text">Previous ({{this.getDiscardDeckCategoryCount()}})</p> 
-    </ion-card>
-    <ion-card class="button-item" (click)="nextCard()" [style.visibility]="this.getPlayDeckCategoryCount() > 0 ? 'visible' : 'hidden'">
+    </ion-button>
+    <ion-button fill="outline" class="button-item" (click)="nextCard()" [style.visibility]="this.getPlayDeckCategoryCount() > 0 ? 'visible' : 'hidden'">
         <p class="button-text"> Next ({{this.getPlayDeckCategoryCount()}})</p> 
-    </ion-card>
+    </ion-button>
   </div>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
@@ -41,7 +41,7 @@
     </ion-fab-button>
   </ion-fab>
 
-  <ion-fab (click)="this.restartGame()" vertical="top" horizontal="start" slot="fixed">
+  <ion-fab (click)="this.restartGame()" vertical="bottom" horizontal="start" slot="fixed">
     <ion-fab-button class="shuffle-fab">
       <ion-icon name="shuffle"></ion-icon>
     </ion-fab-button>
