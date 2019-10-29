@@ -19,6 +19,10 @@ ion-content, ion-header {
     --ion-background-color: black;
 }
 
+.alert {
+    --background: darkgray;
+}
+
 ion-fab-button, ion-button {
     --background: black;
     --border-color: white;

@@ -15,7 +15,8 @@ export class PlayPage implements OnInit {
   categoryList: Set<string>;
   categoryFilter: Array<string>;
   interfaceOptions: any = {
-    header: 'Filter Categories'
+    header: 'Filter Categories',
+    cssClass: 'alert'
   };
 
   constructor(private cardService: CardService) {
