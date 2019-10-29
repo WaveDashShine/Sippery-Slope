@@ -14,6 +14,9 @@ export class PlayPage implements OnInit {
   discardPile: DeckManager;
   categoryList: Set<string>;
   categoryFilter: Array<string>;
+  interfaceOptions: any = {
+    header: 'Filter Categories'
+  };
 
   constructor(private cardService: CardService) {
     this.playingDeck = new DeckManager();
