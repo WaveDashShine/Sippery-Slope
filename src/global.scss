@@ -15,7 +15,15 @@
     src: url('./assets/fonts/epilog.ttf');
 }
 
-@font-face {
-    font-family: 'Good Dog Plain';
-    src: url('./assets/fonts/GOODDP__.TTF');
+ion-content, ion-header {
+    --ion-background-color: black;
+}
+
+ion-fab-button, ion-button {
+    --background: black;
+    --border-color: white;
+    --border-radius: 5px;
+    --border-width: 2px;
+    --border-style: solid;
+    font-family: 'Epilog';
 }

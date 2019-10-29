@@ -3,19 +3,6 @@ ion-card {
     font-family: 'Epilog';
 }
 
-ion-content, ion-header {
-    --ion-background-color: black;
-}
-
-ion-fab-button, ion-button {
-    --background: black;
-    --border-color: white;
-    --border-radius: 5px;
-    --border-width: 2px;
-    --border-style: solid;
-    font-family: 'Epilog';
-}
-
 .card {
     height: auto;
     min-height: 70%;
