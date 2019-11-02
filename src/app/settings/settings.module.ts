@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SettingsPage } from './settings.page';
+import { ExpandableComponent } from "../components/expandable/expandable.component";
 
 @NgModule({
   imports: [
@@ -12,6 +13,6 @@ import { SettingsPage } from './settings.page';
     FormsModule,
     RouterModule.forChild([{ path: '', component: SettingsPage }])
   ],
-  declarations: [SettingsPage]
+  declarations: [SettingsPage, ExpandableComponent]
 })
 export class SettingsPageModule {}

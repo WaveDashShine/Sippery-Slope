@@ -7,6 +7,14 @@ import { Component } from '@angular/core';
 })
 export class SettingsPage {
 
-  constructor() {}
+  expanded: boolean;
+
+  constructor() {
+    this.expanded = false;
+  }
+
+  expandItem(): void {
+    this.expanded = !this.expanded;
+  }
 
 }
