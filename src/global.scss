@@ -23,6 +23,17 @@ ion-content, ion-header {
     --background: darkgray;
 }
 
+.card {
+    height: auto;
+    min-height: 70%;
+    background-image: url(./assets/Card_frame.svg);
+    background-size: 100% 100%;
+    margin: 1%;
+    // drop-shadow for svg
+    //filter: drop-shadow(2px 2px 15px rgba(0, 0, 0, 0.5));
+    filter: grayscale(1);
+}
+
 ion-fab-button, ion-button {
     --background: black;
     --border-color: white;

@@ -13,20 +13,34 @@
         <ion-label color="light">Questions Source</ion-label>
       </ion-item>
       <app-expandable class="expanded-source" [expanded]="this.expanded">
-          <ion-card>
-            <ion-input type="text" placeholder="hello">
+        <ion-card class="card">
+          <ion-input type="text" placeholder="hello">
 
-            </ion-input>
-          </ion-card>
-        </app-expandable>
+          </ion-input>
+        </ion-card>
+      </app-expandable>
       <ion-item class="item-accordion">
         <ion-icon slot="start" color="medium" name="grid"></ion-icon>
         <ion-label color="light">Remove Ads</ion-label>
       </ion-item>
+      <app-expandable class="expanded-source" [expanded]="this.expanded">
+        <ion-card class="card">
+          <ion-input type="text" placeholder="hello">
+
+          </ion-input>
+        </ion-card>
+      </app-expandable>
       <ion-item>
         <ion-icon slot="start" color="medium" name="grid"></ion-icon>
         <ion-label color="light">About</ion-label>
       </ion-item>
+      <app-expandable class="expanded-source" [expanded]="this.expanded">
+        <ion-card class="card">
+          <ion-input type="text" placeholder="hello">
+
+          </ion-input>
+        </ion-card>
+      </app-expandable>
     </ion-list>
 </ion-content>
 
