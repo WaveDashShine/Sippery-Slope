@@ -1,5 +1,7 @@
 {
   "name": "Sipper-Slope",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
